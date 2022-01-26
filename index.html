@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brewing Game</title>
+
+    <link rel="stylesheet" href="./styles/style.css" />
+</head>
+
+<body>
+    <h1>Brewing Game</h1>
+
+    <div class="flex-container">
+        <div class="flex-item sidebar">
+            <div class="sidebar-item"><strong>Collected Ingredients:</strong></div>
+            <div class="sidebar-item">
+                <ul>
+                    <li>Water: <span id="water-coll"> 0</span>/<span id="water-needed"> 0</span></li>
+                    <li>Malt: <span id="malt-coll"> 0</span>/<span id="malt-needed"> 0</span></li>
+                    <li>Hops: <span id="hops-coll"> 0</span>/<span id="hops-needed"> 0</span></li>
+                </ul>
+            </div>
+            <div class="sidebar-item"> Countdown: <span id="timer">1:00</span></div>
+            <div class="sidebar-item"> Level: <span id="level">1</span></div>
+        </div>
+        <div class="flex-item" id="board"></div>
+    </div>
+    <script src="./js/game.js">
+    </script>
+</body>
+
+</html>

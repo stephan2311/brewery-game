@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url(/img/brewery1.jpg);
+  background-size: cover;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+.buttons {
+  text-align: center;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sidebar {
+  display: flex;
+  background-color: blanchedalmond;
+  margin: 3vh 0vw 3vh 0vw;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content:flex-start;
+}
+
+.sidebar-item {
+  display: flex;
+  align-self: center;
+  font-weight: 500;
+  margin: 3vh 0vw 3vh 0vw;
+}
+
+#board {
+  background-color: rgba(255, 235, 205, 0.74);
+  height: 80vh;
+  width: 80vw;
+  margin: 2vh 0vw 2vh 0vw;
+  z-index: 1;
+  background-size: 80;
+  border: 5px solid rgb(0, 0, 0);
+}
+
+ul {
+  list-style-type: none;
+  padding: none;
+}
+
+ul > li {
+  display: flex;
+}
+
+h1 {
+  text-align: center;
+}
+
+.player {
+  background-image: url(/img/mash_tun.png);
+  position: absolute;
+  image-rendering: optimizeSpeed;
+}
+
+.water {
+  background-image: url(/img/water.png);
+  position: absolute;
+  image-rendering: optimizeSpeed;
+}
+
+.malt {
+  background-image: url(/img/malt.png);
+  position: absolute;
+  image-rendering: optimizeSpeed;
+}
+
+.hops {
+  background-image: url(/img/hops.png);
+  position: absolute;
+  image-rendering: optimizeSpeed;
+}
