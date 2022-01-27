@@ -19,16 +19,24 @@ body {
   display: flex;
   background-color: blanchedalmond;
   margin: 3vh 0vw 3vh 0vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content:flex-start;
+  flex-wrap: nowrap;
+  height: 80vh;
+  width: 10vw;
 }
 
 .sidebar-item {
   display: flex;
-  align-self: center;
+  align-self: left;
   font-weight: 500;
-  margin: 3vh 0vw 3vh 0vw;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.sidebar-item > img {
+  height: 50px;
 }
 
 #board {
@@ -43,7 +51,8 @@ body {
 
 ul {
   list-style-type: none;
-  padding: none;
+  margin: 0; 
+  padding: 0;
 }
 
 ul > li {

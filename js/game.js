@@ -28,7 +28,7 @@ class Game {
 
         this.addEventListeners();
 
-        this.countdown(this.seconds);
+        // this.countdown(this.seconds);
 
         // Water
         setInterval(() => {
@@ -48,7 +48,6 @@ class Game {
                     this.countWater();
                     this.removeWaterFromArr(this.waterArr, elm);
                     elm.domElement.remove();
-                    this.compareObj();
                 }
                 elm.removeObstacle(elm);
             });
@@ -72,7 +71,6 @@ class Game {
                     this.countMalt();
                     this.removeMaltFromArr(this.maltArr, elm);
                     elm.domElement.remove();
-                    this.compareObj();
                 }
                 elm.removeObstacle(elm);
             });
@@ -96,11 +94,14 @@ class Game {
                     this.countHops();
                     this.removeHopsFromArr(this.hopsArr, elm);
                     elm.domElement.remove();
-                    this.compareObj();
                 }
                 elm.removeObstacle(elm);
 
             });
+        }, this.refreshRate);
+
+        setInterval(() => {
+            this.compareObj();
         }, this.refreshRate);
 
     }
@@ -115,7 +116,6 @@ class Game {
             this.drawDomElm(this.player);
         });
         // document.addEventListener("click", myScript);
-
     }
 
     createDomElm(instance) {
@@ -184,18 +184,26 @@ class Game {
     }
 
     compareObj() {
-        if (JSON.stringify(this.resultObj) === JSON.stringify(this.givenObj)) {
-            this.level++;
-            let levelCount = document.getElementById('level');
-            levelCount.innerHTML = this.level;
+        // if (JSON.stringify(this.resultObj) === JSON.stringify(this.givenObj))
+        if (this.resultObj.water === this.givenObj.water && this.resultObj.malt === this.givenObj.malt && this.resultObj.hops === this.givenObj.hops) {
             for (let key in this.resultObj) {
                 this.resultObj[key] = 0;
             }
+            this.level++;
+            if (this.level++) {
+                let img = document.createElement('img');
+                img.src = 'img/beer_bottle.png';
+                document.getElementById('level').appendChild(img);
+            }
+            count.innerHTML = this.resultObj.water;
+            count.innerHTML = this.resultObj.malt;
+            count.innerHTML = this.resultObj.hops;
         }
-    }
+}
 
+    /*
     countdown() {
-        function tick() {
+        function tick(seconds) {
             let timer = document.getElementById("timer");
             seconds--;
             timer.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
@@ -205,6 +213,7 @@ class Game {
         }
         tick();
     }
+    */
 
 }
 
@@ -219,11 +228,15 @@ class Player {
     }
 
     moveLeft() {
-        this.positionX -= 3;
+        if (this.positionX >= 20) {
+            this.positionX -= 3;
+        }
     }
 
     moveRight() {
-        this.positionX += 3;
+        if (this.positionX <= 90) {
+            this.positionX += 3;
+        }
     }
 }
 
