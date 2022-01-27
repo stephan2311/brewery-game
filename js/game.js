@@ -30,12 +30,46 @@ class Game {
 
         // this.countdown(this.seconds);
 
+
+        // General Function
+
+        // generateItems(itemReplier, obstacleTitle, obstacleArr) {
+        //     if (this.timer % Math.floor(Math.random() * itemReplier) === 0) {
+        //         const obstacleTitle = new Water();
+        //         this.obstacleArr.push(obstacleTitle);
+        //         obstacleTitle.domElement = this.createDomElm(obstacleTitle);
+        //         this.drawDomElm(obstacleTitle);
+        //     }
+
+        //     this.obstacleArr.forEach((elm) => {
+        //         elm.moveDown();
+        //         this.drawDomElm(elm);
+        //         if (this.collision(elm)) {
+        //             this.countWater();
+        //             this.removeWaterFromArr(this.obstacleArr, elm);
+        //             elm.domElement.remove();
+        //         }
+        //         elm.removeObstacle(elm);
+        //     });
+        
+        // }
+
+
+        // // General Interval
+        // setInterval(() => {
+        //     this.timer++;
+        //     this.generateItems(250,);
+
+        // }, this.refreshRate);
+
+
+
         // Water
         setInterval(() => {
             this.timer++;
 
             if (this.timer % Math.floor(Math.random() * 250) === 0) {
-                const newWater = new Water();
+                const newWater = new ParentObstacle("water", 3, 8);
                 this.waterArr.push(newWater);
                 newWater.domElement = this.createDomElm(newWater);
                 this.drawDomElm(newWater);
@@ -45,8 +79,10 @@ class Game {
                 elm.moveDown();
                 this.drawDomElm(elm);
                 if (this.collision(elm)) {
-                    this.countWater();
-                    this.removeWaterFromArr(this.waterArr, elm);
+                    // this.countWater();
+                    this.count(this.resultObj.water, 'water-coll');
+                    // this.removeWaterFromArr(this.waterArr, elm);
+                    this.removeObstacleFromArr(this.waterArr, elm)
                     elm.domElement.remove();
                 }
                 elm.removeObstacle(elm);
@@ -58,7 +94,7 @@ class Game {
             this.timer++;
 
             if (this.timer % Math.floor(Math.random() * 500) === 0) {
-                const newMalt = new Malt();
+                const newMalt = new ParentObstacle("malt", 3, 5);
                 this.maltArr.push(newMalt);
                 newMalt.domElement = this.createDomElm(newMalt);
                 this.drawDomElm(newMalt);
@@ -68,8 +104,10 @@ class Game {
                 elm.moveDown();
                 this.drawDomElm(elm);
                 if (this.collision(elm)) {
-                    this.countMalt();
-                    this.removeMaltFromArr(this.maltArr, elm);
+                    // this.countMalt();
+                    this.count(this.resultObj.malt, 'malt-coll');
+                    // this.removeMaltFromArr(this.maltArr, elm);
+                    this.removeObstacleFromArr(this.maltArr, elm)
                     elm.domElement.remove();
                 }
                 elm.removeObstacle(elm);
@@ -81,7 +119,7 @@ class Game {
             this.timer++;
 
             if (this.timer % Math.floor(Math.random() * 1000) === 0) {
-                const newHops = new Hops();
+                const newHops = new ParentObstacle("hops", 2, 5);
                 this.hopsArr.push(newHops);
                 newHops.domElement = this.createDomElm(newHops);
                 this.drawDomElm(newHops);
@@ -91,8 +129,10 @@ class Game {
                 elm.moveDown();
                 this.drawDomElm(elm);
                 if (this.collision(elm)) {
-                    this.countHops();
-                    this.removeHopsFromArr(this.hopsArr, elm);
+                    // this.countHops();
+                    this.count(this.resultObj.hops, 'hops-coll');
+                    // this.removeHopsFromArr(this.hopsArr, elm);
+                    this.removeObstacleFromArr(this.hopsArr, elm)
                     elm.domElement.remove();
                 }
                 elm.removeObstacle(elm);
@@ -144,44 +184,21 @@ class Game {
         }
     }
 
-    removeWaterFromArr(waterArr, elm) {
-        let index = waterArr.indexOf(elm);
+    // General removeObstacle Method
+    removeObstacleFromArr(obstacleArr, elm) {
+        let index = obstacleArr.indexOf(elm);
         if (index > -1) {
-            waterArr.splice(index, 1);
+            obstacleArr.splice(index, 1);
         }
     }
 
-    removeMaltFromArr(maltArr, elm) {
-        let index = maltArr.indexOf(elm);
-        if (index > -1) {
-            maltArr.splice(index, 1);
-        }
+    // General Counting Method
+    count(elm, elmID) {
+        elm += 1;
+        let count = document.getElementById(elmID);
+        count.innerHTML = elm;
     }
 
-    removeHopsFromArr(hopsArr, elm) {
-        let index = hopsArr.indexOf(elm);
-        if (index > -1) {
-            hopsArr.splice(index, 1);
-        }
-    }
-
-    countWater() {
-        this.resultObj.water += 1;
-        let count = document.getElementById('water-coll');
-        count.innerHTML = this.resultObj.water;
-    }
-
-    countMalt() {
-        this.resultObj.malt += 1;
-        let count = document.getElementById('malt-coll');
-        count.innerHTML = this.resultObj.malt;
-    }
-
-    countHops() {
-        this.resultObj.hops += 1;
-        let count = document.getElementById('hops-coll');
-        count.innerHTML = this.resultObj.hops;
-    }
 
     compareObj() {
         // if (JSON.stringify(this.resultObj) === JSON.stringify(this.givenObj))
@@ -199,7 +216,7 @@ class Game {
             count.innerHTML = this.resultObj.malt;
             count.innerHTML = this.resultObj.hops;
         }
-}
+    }
 
     /*
     countdown() {
@@ -241,10 +258,13 @@ class Player {
 }
 
 class ParentObstacle {
-    constructor() {
+    constructor(className, width, height) {
         this.positionX = (Math.floor(Math.random() * 85) + 15);
         this.positionY = 70;
         this.domElement = null;
+        this.className = className;
+        this.width = width;
+        this.height = height;
     }
 
     moveDown() {
@@ -255,33 +275,6 @@ class ParentObstacle {
         if (elm.positionY < 7) {
             elm.domElement.remove();
         }
-    }
-}
-
-class Water extends ParentObstacle {
-    constructor(positionX, positionY, domElement) {
-        super(positionX, positionY, domElement);
-        this.className = "water";
-        this.width = 3;
-        this.height = 8;
-    }
-}
-
-class Malt extends ParentObstacle {
-    constructor(positionX, positionY, domElement) {
-        super(positionX, positionY, domElement);
-        this.className = "malt";
-        this.width = 3;
-        this.height = 5;
-    }
-}
-
-class Hops extends ParentObstacle {
-    constructor(positionX, positionY, domElement) {
-        super(positionX, positionY, domElement);
-        this.className = "hops";
-        this.width = 2;
-        this.height = 5;
     }
 }
 
