@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('./img/brewery1.jpg');
+  background-image: url('../img/brewery1.jpg');
   background-size: cover;
   font-family: "Montserrat";
   font-size: 1em;
@@ -122,21 +122,21 @@ h1 {
 }
 
 .player, .water, .malt, .hops{
-  background-image: url('./img/mash_tun.png');
+  background-image: url('../img/mash_tun.png');
   position: absolute;
   image-rendering: optimizeSpeed;
 }
 
 .water {
-  background-image: url('./img/water.png');
+  background-image: url('../img/water.png');
 }
 
 .malt {
-  background-image: url('./img/malt.png');
+  background-image: url('../img/malt.png');
 }
 
 .hops {
-  background-image: url('./img/hops.png');
+  background-image: url('../img/hops.png');
 }
 
 #time-over-box {
