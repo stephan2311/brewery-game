@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
-
 body {
   margin: 0;
   padding: 0;
@@ -37,6 +36,7 @@ body {
   transform: translate(2px, 2px);
 }
 
+
 .flex-container {
   display: flex;
   justify-content: space-around;
@@ -67,7 +67,6 @@ body {
 .sidebar-item > img {
   height: 50px;
 }
-
 
 #board {
   background-color: rgba(255, 235, 205, 0.74);
@@ -149,8 +148,7 @@ h1 {
 #time-over-box-item {
   background-color:blanchedalmond;
   border: 5px solid rgb(0, 0, 0);
-  width: 500px;
-  height: 200px;
+  width: 40vw;
   padding: 1em 2em 4em 2em;
   margin: 2em;
   text-align: center;
