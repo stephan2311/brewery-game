@@ -250,6 +250,8 @@ class Game {
                 setTimeout(tick, 1000);
             } else {
                 window.location.replace("./lost.html");
+                let levelEnd = document.getElementById("level-end");
+                levelEnd.innerHTML = this.level;
             }
         }
         tick();
