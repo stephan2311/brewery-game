@@ -14,6 +14,16 @@ class Game {
         this.givenObj = { water: 3, malt: 2, hops: 1 };
     }
 
+    setup() {
+        const introElement = document.getElementById("intro");
+        const startButtonElement = document.getElementById("start-button");
+        startButtonElement.addEventListener("click", () => {
+            this.start();
+            introElement?.remove();
+        });
+        introElement.appendChild(startButtonElement);
+    }
+
     start() {
 
         let waterNeeded = document.getElementById('water-needed');
@@ -22,13 +32,14 @@ class Game {
         maltNeeded.innerHTML = this.givenObj.malt;
         let hopsNeeded = document.getElementById('hops-needed');
         hopsNeeded.innerHTML = this.givenObj.hops;
+
         this.player = new Player();
         this.player.domElement = this.createDomElm(this.player);
         this.drawDomElm(this.player);
 
         this.addEventListeners();
 
-        // this.countdown(this.seconds);
+        this.countdown();
 
 
         // General Function
@@ -51,16 +62,8 @@ class Game {
         //         }
         //         elm.removeObstacle(elm);
         //     });
-        
+
         // }
-
-
-        // // General Interval
-        // setInterval(() => {
-        //     this.timer++;
-        //     this.generateItems(250,);
-
-        // }, this.refreshRate);
 
 
 
@@ -79,14 +82,16 @@ class Game {
                 elm.moveDown();
                 this.drawDomElm(elm);
                 if (this.collision(elm)) {
+                    console.log(this.resultObj);
+                    // this.resultObj.water++;
+                    this.count('water', 'water-coll');
                     // this.countWater();
-                    this.count(this.resultObj.water, 'water-coll');
-                    // this.removeWaterFromArr(this.waterArr, elm);
                     this.removeObstacleFromArr(this.waterArr, elm)
                     elm.domElement.remove();
                 }
                 elm.removeObstacle(elm);
             });
+            this.compareObj();
         }, this.refreshRate);
 
         // Malt
@@ -105,13 +110,14 @@ class Game {
                 this.drawDomElm(elm);
                 if (this.collision(elm)) {
                     // this.countMalt();
-                    this.count(this.resultObj.malt, 'malt-coll');
+                    this.count('malt', 'malt-coll');
                     // this.removeMaltFromArr(this.maltArr, elm);
                     this.removeObstacleFromArr(this.maltArr, elm)
                     elm.domElement.remove();
                 }
                 elm.removeObstacle(elm);
             });
+            this.compareObj();
         }, this.refreshRate);
 
         // Hops
@@ -130,7 +136,7 @@ class Game {
                 this.drawDomElm(elm);
                 if (this.collision(elm)) {
                     // this.countHops();
-                    this.count(this.resultObj.hops, 'hops-coll');
+                    this.count('hops', 'hops-coll');
                     // this.removeHopsFromArr(this.hopsArr, elm);
                     this.removeObstacleFromArr(this.hopsArr, elm)
                     elm.domElement.remove();
@@ -138,9 +144,6 @@ class Game {
                 elm.removeObstacle(elm);
 
             });
-        }, this.refreshRate);
-
-        setInterval(() => {
             this.compareObj();
         }, this.refreshRate);
 
@@ -164,6 +167,7 @@ class Game {
         htmlTag.style.width = instance.width + "vw";
         htmlTag.style.height = instance.height + "vh";
         const board = document.getElementById("board");
+        // board.innerHTML = ''; 
         board.appendChild(htmlTag);
         return htmlTag;
     }
@@ -194,44 +198,72 @@ class Game {
 
     // General Counting Method
     count(elm, elmID) {
-        elm += 1;
+        // console.log(elm);
+        // console.log(this.resultObj[elm]);
+        this.resultObj[elm] += 1;
         let count = document.getElementById(elmID);
-        count.innerHTML = elm;
+        count.innerHTML = this.resultObj[elm];
     }
+
+    // countWater() {
+    //     console.log(this.resultObj.water);
+    //     this.resultObj.water += 1;
+    //     let count = document.getElementById('water-coll');
+    //     count.innerHTML = this.resultObj.water;
+    // }
 
 
     compareObj() {
         // if (JSON.stringify(this.resultObj) === JSON.stringify(this.givenObj))
         if (this.resultObj.water === this.givenObj.water && this.resultObj.malt === this.givenObj.malt && this.resultObj.hops === this.givenObj.hops) {
             for (let key in this.resultObj) {
+                console.log(key);
+                console.log(this.resultObj);
                 this.resultObj[key] = 0;
             }
             this.level++;
+            console.log(this.level);
             if (this.level++) {
                 let img = document.createElement('img');
-                img.src = 'img/beer_bottle.png';
+                img.src = './img/beer_bottle.png';
                 document.getElementById('level').appendChild(img);
             }
-            count.innerHTML = this.resultObj.water;
-            count.innerHTML = this.resultObj.malt;
-            count.innerHTML = this.resultObj.hops;
+            let countW = document.getElementById('water-coll');
+            let countM = document.getElementById('malt-coll');
+            let countH = document.getElementById('hops-coll');
+            countW.innerHTML = this.resultObj.water;
+            countM.innerHTML = this.resultObj.malt;
+            countH.innerHTML = this.resultObj.hops;
         }
     }
 
-    /*
+    // gameOver() {
+    //     window.location.href = "./game-over.html"
+    // }
     countdown() {
-        function tick(seconds) {
+        let seconds = 60;
+        function tick() {
             let timer = document.getElementById("timer");
             seconds--;
             timer.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
             if (seconds > 0) {
                 setTimeout(tick, 1000);
+            } else {
+                window.location.replace("./lost.html");
             }
         }
         tick();
-    }
-    */
 
+    }
+    // let timer = document.getElementById("timer");
+    // console.log(timer);
+    // this.seconds--;
+    // timer.innerHTML = "0:" + (this.seconds < 10 ? "0" : "") + String(this.seconds);
+    // timer.innerHTML = this.seconds;
+    // if (this.seconds > 0) {
+    //     timer.innerHTML = 0;
+    // }
+    // console.log(this.seconds);
 }
 
 class Player {
@@ -259,7 +291,7 @@ class Player {
 
 class ParentObstacle {
     constructor(className, width, height) {
-        this.positionX = (Math.floor(Math.random() * 85) + 15);
+        this.positionX = (Math.floor(Math.random() * 75) + 20);
         this.positionY = 70;
         this.domElement = null;
         this.className = className;
@@ -279,4 +311,4 @@ class ParentObstacle {
 }
 
 const game = new Game();
-game.start();
+game.setup();

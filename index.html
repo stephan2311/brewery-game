@@ -15,30 +15,48 @@
 
     <div class="flex-container">
         <div class="flex-item sidebar">
-            <div class="sidebar-item">
-                <p><strong>Ingredients:</strong></p>
-            </div>
-            <div class="sidebar-item">
+            <div>
+                <p><strong>For our beer we need:</strong></p>
                 <ul>
-                    <li><img src="/img/water.png"> <span id="water-coll"> 0</span>/<span id="water-needed"> 0</span></li>
-                    <li><img src="/img/malt.png">  <span id="malt-coll"> 0</span>/<span id="malt-needed"> 0</span></li>
-                    <li><img src="/img/hops.png">  <span id="hops-coll"> 0</span>/<span id="hops-needed"> 0</span></li>
+                    <li> <img src="./img/water.png" height="50"><img src="./img/water.png" height="50"><img
+                            src="./img/water.png" height="50"></li>
+                    <li> <img src="./img/malt.png" width="50"><img src="./img/malt.png" width="50"></li>
+                    <li> <img src="./img/hops.png" height="50"></li>
+                </ul>
+            </div>
+            <div>
+                <p><strong>You collected:</strong></p>
+                <ul>
+                    <li> Water: <span id="water-coll"> 0</span>/<span id="water-needed"> 0</span></li>
+                    <li> Malt: <span id="malt-coll"> 0</span>/<span id="malt-needed"> 0</span></li>
+                    <li> Hops: <span id="hops-coll"> 0</span>/<span id="hops-needed"> 0</span></li>
                 </ul>
             </div>
             <div class="sidebar-item">
-                <p>Beers brewed:</p>
+                <p><strong>Beers brewed:</strong></p>
             </div>
-            <div class="sidebar-item">
-                <p id="level"></p>
+            <div class="sidebar-item" id="level">
             </div>
-            <div class="sidebar-item">
-                <p>Countdown:</p>
-            </div>
-            <div class="sidebar-item">
-                <p id="timer">1:00</p>
+            <div>
+                <p><strong>Countdown</strong></p>
+                <span id="timer">1:00</span>
             </div>
         </div>
-        <div class="flex-item" id="board"></div>
+        <div class="flex-item" id="board">
+            <div class="flex-item" id="intro">
+                <p><strong>Introduction</strong></p>
+                <ol>
+                    <li>After starting the game, you have 2 minutes, to collect all the ingredients for our beer.</li>
+                    <li>Our supplier will throw the ingredients randomly into our brewhouse.</li>
+                    <li>You have to collect the ingredients into your mashtun by moving left and right.</li>
+                    <li>BUT: pay attention to the right amount! If you collect more ingredients than we need, we cannot
+                        brew and you have to restart.</li>
+                    <li>GOOD LUCK!!!</li>
+                </ol>
+                <p><button id="start-button" class="button" role="button">Let's Play</button>
+                </p>
+            </div>
+        </div>
     </div>
     <script src="./js/game.js">
     </script>

@@ -1,18 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
 body {
   margin: 0;
   padding: 0;
   background-image: url(/img/brewery1.jpg);
   background-size: cover;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-family: "Montserrat";
+  font-size: 1em;
 }
 
-.buttons {
+.button {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0 18px;
+  line-height: 50px;
   text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:hover {
+  background-color: #fff;
+}
+
+.button:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
 }
 
 .flex-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .sidebar {
@@ -24,20 +51,23 @@ body {
   flex-direction: column;
   flex-wrap: nowrap;
   height: 80vh;
-  width: 10vw;
+  width: 12vw;
 }
 
 .sidebar-item {
   display: flex;
   align-self: left;
   font-weight: 500;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .sidebar-item > img {
   height: 50px;
 }
+
 
 #board {
   background-color: rgba(255, 235, 205, 0.74);
@@ -47,6 +77,14 @@ body {
   z-index: 1;
   background-size: 80;
   border: 5px solid rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+#timer {
+  font-size: 2em;
 }
 
 ul {
@@ -57,13 +95,33 @@ ul {
 
 ul > li {
   display: flex;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+ol {
+  list-style-type: none;
+  margin: 0; 
+  padding: 0;
+}
+
+ol > li {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+span {
+  margin-left: 10px;
+  margin-left: 10px;
 }
 
 h1 {
   text-align: center;
+  font-weight: 700;
+  font-size: 2em;
 }
 
-.player {
+.player, .water, .malt, .hops{
   background-image: url(/img/mash_tun.png);
   position: absolute;
   image-rendering: optimizeSpeed;
@@ -71,18 +129,29 @@ h1 {
 
 .water {
   background-image: url(/img/water.png);
-  position: absolute;
-  image-rendering: optimizeSpeed;
 }
 
 .malt {
   background-image: url(/img/malt.png);
-  position: absolute;
-  image-rendering: optimizeSpeed;
 }
 
 .hops {
   background-image: url(/img/hops.png);
-  position: absolute;
-  image-rendering: optimizeSpeed;
+}
+
+#time-over-box {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#time-over-box-item {
+  background-color:blanchedalmond;
+  border: 5px solid rgb(0, 0, 0);
+  width: 500px;
+  height: 200px;
+  padding: 1em 2em 4em 2em;
+  margin: 2em;
+  text-align: center;
 }
